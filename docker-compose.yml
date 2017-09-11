@@ -51,8 +51,7 @@ services:
     # volumes: ['/var/lib/docker/volumes/bdd_xap-logs-volume/_data/wa:/mnt/log:ro']
     volumes:
       - ./filebeat/test-logs/:/mnt/log:ro
-    depends_on: ['logstash']
-    # depends_on: ['elasticsearch']
+    depends_on: ['elasticsearch', 'logstash', 'kibana']
 
 networks:
 
