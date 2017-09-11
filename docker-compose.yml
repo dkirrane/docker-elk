@@ -39,6 +39,20 @@ services:
     depends_on:
       - elasticsearch
 
+  elk-wait:
+    image: jwilder/dockerize
+    command: dockerize -timeout 2m
+                  -wait http://${HOST_IP}:5601/app/kibana
+
+  filebeat:
+    image: docker.elastic.co/beats/filebeat:5.5.2
+    # If the host system has logs at "/var/log", mount them at "/mnt/log"
+    # inside the container, where Filebeat can find them.
+    # volumes: ['/var/lib/docker/volumes/bdd_xap-logs-volume/_data/wa:/mnt/log:ro']
+    volumes:
+      - ./filebeat/test-logs/:/mnt/log:ro   
+    depends_on: ['elasticsearch', 'setup_filebeat']
+
 networks:
 
   elk:
