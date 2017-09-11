@@ -30,4 +30,8 @@ echo ${HOST_IP}
 docker-compose down
 docker-compose kill
 
-docker-compose up -d
+docker-compose up -d elasticsearch logstash kibana
+
+docker-compose run elk-wait
+
+docker-compose up -d filebeat
