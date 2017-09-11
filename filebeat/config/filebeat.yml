@@ -6,7 +6,10 @@ filebeat.prospectors:
 processors:
 - add_cloud_metadata:
 
-output.elasticsearch:
-  hosts: ['elasticsearch:9200']
+output.logstash:
+  hosts: ["logstash:5044"]
+
+# output.elasticsearch:
+  # hosts: ['elasticsearch:9200']
   # username: elastic
   # password: changeme
