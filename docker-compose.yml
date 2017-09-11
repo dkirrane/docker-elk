@@ -41,7 +41,7 @@ services:
 
   elk-wait:
     image: jwilder/dockerize
-    command: echo "" && dockerize -timeout 5m
+    command: dockerize -timeout 5m
                   -wait http://${HOST_IP}:5601/app/kibana
 
   filebeat:
