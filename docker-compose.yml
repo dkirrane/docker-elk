@@ -41,7 +41,7 @@ services:
 
   elk-wait:
     image: jwilder/dockerize
-    command: dockerize -timeout 5m
+    command: echo "" && dockerize -timeout 5m
                   -wait http://${HOST_IP}:5601/app/kibana
 
   filebeat:
@@ -50,8 +50,9 @@ services:
     # inside the container, where Filebeat can find them.
     # volumes: ['/var/lib/docker/volumes/bdd_xap-logs-volume/_data/wa:/mnt/log:ro']
     volumes:
-      - ./filebeat/test-logs/:/mnt/log:ro   
-    depends_on: ['elasticsearch']
+      - ./filebeat/test-logs/:/mnt/log:ro
+    depends_on: ['logstash']
+    # depends_on: ['elasticsearch']
 
 networks:
 
