@@ -34,4 +34,7 @@ docker-compose up -d elasticsearch logstash kibana
 
 docker-compose run elk-wait
 
-docker-compose up -d filebeat
+echo ""
+echo "Starting filebeat"
+# docker-compose up -d filebeat
+docker-compose run filebeat
