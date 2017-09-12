@@ -34,7 +34,7 @@ docker-compose up -d elasticsearch logstash kibana
 
 echo ""
 echo "Waiting for Kibana to start"
-docker-compose run elk-wait
+docker-compose run --rm elk-wait
 
 echo ""
 echo "Starting filebeat"
