@@ -54,6 +54,14 @@ services:
     depends_on: ['elasticsearch', 'logstash', 'kibana']
 
   # https://github.com/elastic/kibana/pull/10858
+  dashboard-list:
+    image: byrnedo/alpine-curl
+    # curl --user <username>:<password> -XGET localhost:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
+    # command: ['sh', '-c', 'curl -XPUT http://$COUCHDB_SERVICE_HOST:$COUCHDB_SERVICE_PORT/_config/admins/$COUCHDB_USERNAME -d"\"$COUCHDB_PASSWORD"\"']
+    command: -XGET http://${HOST_IP}:5601/app/kibana/dashboards/export?dashboard=33797130-97ae-11e7-aa10-79a79f2e360b > my-dashboards.json
+    depends_on: ['kibana']    
+
+  # https://github.com/elastic/kibana/pull/10858
   dashboard-export:
     image: byrnedo/alpine-curl
     # curl --user <username>:<password> -XGET localhost:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
