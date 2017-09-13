@@ -45,7 +45,7 @@ services:
                   -wait http://${HOST_IP}:5601/app/kibana
 
   filebeat:
-    image: docker.elastic.co/beats/filebeat:5.5.2
+    image: docker.elastic.co/beats/filebeat:5.5.1
     # If the host system has logs at "/var/log", mount them at "/mnt/log"
     # inside the container, where Filebeat can find them.
     # volumes: ['/var/lib/docker/volumes/bdd_xap-logs-volume/_data/wa:/mnt/log:ro']
@@ -58,7 +58,7 @@ services:
     image: byrnedo/alpine-curl
     # curl --user <username>:<password> -XGET localhost:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
     # command: ['sh', '-c', 'curl -XPUT http://$COUCHDB_SERVICE_HOST:$COUCHDB_SERVICE_PORT/_config/admins/$COUCHDB_USERNAME -d"\"$COUCHDB_PASSWORD"\"']
-    command: -XGET http://${HOST_IP}:5601/app/kibana/dashboards/export?dashboard=33797130-97ae-11e7-aa10-79a79f2e360b > my-dashboards.json
+    command: -XGET http://${HOST_IP}:5601/api/kibana/dashboards/export?dashboard=33797130-97ae-11e7-aa10-79a79f2e360b > my-dashboards.json
     depends_on: ['kibana']    
 
   # https://github.com/elastic/kibana/pull/10858
@@ -66,7 +66,8 @@ services:
     image: byrnedo/alpine-curl
     # curl --user <username>:<password> -XGET localhost:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
     # command: ['sh', '-c', 'curl -XPUT http://$COUCHDB_SERVICE_HOST:$COUCHDB_SERVICE_PORT/_config/admins/$COUCHDB_USERNAME -d"\"$COUCHDB_PASSWORD"\"']
-    command: -XGET http://${HOST_IP}:5601/app/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
+    command: -XGET http://${HOST_IP}:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
+    # curl -XGET http://${HOST_IP}:5601/app/kibana/dashboards/export?dashboard=33797130-97ae-11e7-aa10-79a79f2e360b > my-dashboards.json
     depends_on: ['kibana']
 
   dashboard-import:
