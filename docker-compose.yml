@@ -58,7 +58,7 @@ services:
     image: byrnedo/alpine-curl
     # curl --user <username>:<password> -XGET localhost:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
     # command: ['sh', '-c', 'curl -XPUT http://$COUCHDB_SERVICE_HOST:$COUCHDB_SERVICE_PORT/_config/admins/$COUCHDB_USERNAME -d"\"$COUCHDB_PASSWORD"\"']
-    command: -XGET http://${HOST_IP}:5601/api/kibana/dashboards/export?dashboard=33797130-97ae-11e7-aa10-79a79f2e360b > my-dashboards.json
+    command: -XGET http://${HOST_IP}:5601/api/kibana/dashboards/export?dashboard=9371a5d0-9894-11e7-b983-6d84ca3801b8 > my-dashboards.json
     depends_on: ['kibana']    
 
   # https://github.com/elastic/kibana/pull/10858
@@ -75,8 +75,8 @@ services:
     # curl --user <username>:<password> -XGET localhost:5601/api/kibana/dashboards/export?dashboard=<some-dashboard-uuid> > my-dashboards.json
     # command: ['sh', '-c', 'curl -XPUT http://$COUCHDB_SERVICE_HOST:$COUCHDB_SERVICE_PORT/_config/admins/$COUCHDB_USERNAME -d"\"$COUCHDB_PASSWORD"\"']
     volumes:
-      - ./filebeat/test-logs/:/mnt/log:ro    
-    command: -XPOST http://${HOST_IP}:5601/api/kibana/dashboards/import -H 'kbn-xsrf:true' -H 'Content-type:application/json' -d @./my-dashboards.json
+      - ./dashboard-import/dashboards/:/dashboards/:ro    
+    command: -XPOST http://${HOST_IP}:5601/api/kibana/dashboards/import -H 'kbn-xsrf:true' -H 'Content-type:application/json' -d @./dashboards/my-dashboards.json
     depends_on: ['kibana']    
 
 networks:
