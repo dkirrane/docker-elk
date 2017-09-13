@@ -41,4 +41,4 @@ echo "Starting filebeat"
 # docker-compose up -d filebeat
 # docker-compose run filebeat
 
-nc localhost 5000 < ./filebeat/test-logs/wa-impu_1_1.json.log
+nc localhost 5001 < ./filebeat/test-logs/wa-impu_1_1.json.log
