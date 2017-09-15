@@ -3,8 +3,8 @@ filebeat.prospectors:
   paths:
     - /mnt/log/Avaya/*.log
 
-processors:
-- add_cloud_metadata:
+# processors:
+# - add_locale:
 
 output.logstash:
   hosts: ["logstash:5044"]

@@ -30,7 +30,7 @@ echo ${HOST_IP}
 docker-compose down
 docker-compose kill
 
-docker-compose up -d elasticsearch logstash kibana
+docker-compose up -d --build elasticsearch logstash kibana
 
 echo ""
 echo "Waiting for Kibana to start"
@@ -41,4 +41,6 @@ echo "Starting filebeat"
 # docker-compose up -d filebeat
 # docker-compose run filebeat
 
-nc localhost 5001 < ./filebeat/test-logs/wa-impu_1_1.json.log
+docker-compose up -d --build dashboard-import
+
+# nc localhost 5001 < ./filebeat/test-logs/wa-impu_1_1.json.log
