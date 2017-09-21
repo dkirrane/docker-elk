@@ -1,5 +1,4 @@
-version: '2'
-
+version: '3'
 services:
 
   elasticsearch:
@@ -21,6 +20,8 @@ services:
       - ./logstash/pipeline:/usr/share/logstash/pipeline
     ports:
       - "5000:5000"
+      - "5001:5001"
+      - "5044:5044"
     environment:
       LS_JAVA_OPTS: "-Xmx256m -Xms256m"
     networks:
